@@ -3,10 +3,9 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-/*Get All Categories:
-This piece of code uses a function called Category.findAll() which takes an object with two keys: include and model, where the value of include is set to {model: Product} and attributes is set to ['product_name].
-The function then uses .then() to return the data as JSON after it has been found.  Simply put, the code attempts to retrieve all products from the database and then returns them as JSON.  If there are no records found
-for the criteria then a 500 error message will be sent back.  
+/*Get All Products:
+This part of the code is used to find all products that have a product_name attribute.  The Category.findAll() method is used to return an array of all products that have been categorized as 'category_name'
+and then res.json() is used to return the categoryData to the user.  If there is an error retrieving the data then the user will get back a 500 error message.  
 */
 router.get('/', (req, res) => {
   Category.findAll(
@@ -26,8 +25,8 @@ router.get('/', (req, res) => {
 
 
 /*Get One Category:
-This piece of code uses a function called Category.findOne .  This is trying to find a category with the id of "1" and then return its data.  If there is an error, can't find the data that the user is asking for, then a 500 error
-message will be sent back.  
+This piece of code is used to find a single product on its id.  The Category.findOne() method is used to request an array of products from a specific category named 'category_id'.  Just like the previous section of code, the
+results are returned as JSON data using the res.json() method.  Again if there is an error, the data the user is trying to retrieve can't be found, then a 500 error appears.  
 */
 router.get('/:id', (req, res) => {
   Category.findOne({
@@ -48,7 +47,8 @@ router.get('/:id', (req, res) => {
 
 
 /*Post New Category:
-This piece of code creates a new category and thens returns the data to the user.  The 
+This part of the code is used to create a new category.  It returns an object with properties like name.  The code creates a new category on the server and then returns it to the user in JSON format using the res.json()method again.
+Once again if there is an error in retrieving the data a 500 error appears.   
 */
 router.post('/', (req, res) => {
   Category.create({
@@ -63,6 +63,9 @@ router.post('/', (req, res) => {
 
 
 /*Put Update Category:
+This piece of code is used to update a category.  First the code checks to see if it is the correct category the user is trying to update, basically to see it the category exists at all to make an update on.  If the category doesn't 
+exist then the a 404 error will appear, letting the user know that there isn't a category with that id.  If the category does exist then the code updates the data in that category by calling the update method.  The code will update
+the category with the specified ID in the URL to a new value.  
 */
 router.put('/:id', (req, res) => {
   Category.update(
@@ -89,7 +92,8 @@ router.put('/:id', (req, res) => {
 
 
 /*Delete category:
-
+This section of code is used to delete a category.  Just like before the code first checks to see if there is even a category with the id the user is trying to find.  If there is not a category matching that ID then a 404 error will appear. 
+If the category exists then the data for that category is sent back and the category with the spcified ID will be deleted.  
 */
 
 router.delete('/:id', (req, res) => {
@@ -104,6 +108,10 @@ router.delete('/:id', (req, res) => {
       return;
     }
     res.json(categoryData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
   });
 });
 
