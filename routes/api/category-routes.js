@@ -24,14 +24,43 @@ router.get('/', (req, res) => {
   });
 });
 
+/*Get One Category/ID:
+This piece of code uses a function called Category.findOne .  This is trying to find a category with the id of "1" and then return its data.  If there is an error, can't find the data that the user is asking for, then a 500 error
+message will be sent back.  
+*/
 router.get('/:id', (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+  Category.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: {
+      model: Product,
+      attributes: ['category_id']
+    }
+  })
+  .then(categoryData => res.json(categoryData))
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
+
+/*Post New Category:
+This piece of code creates a new category and thens returns the data to the user.  The 
+*/
 router.post('/', (req, res) => {
-  // create a new category
+  Category.create({
+    category_name: req.body.category_name
+  })
+  .then(categoryData => res.json(categoryData))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
+
+
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
