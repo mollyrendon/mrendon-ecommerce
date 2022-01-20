@@ -4,7 +4,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 /*Get All Products:
-
+This code is used to find all products that have a category of category_name and a tag of tag_name and the returned data will be JSON data.  
 */
 
 router.get('/', (req, res) => {
@@ -127,7 +127,7 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });

@@ -2,10 +2,11 @@
 
 # Purpose
 
-An application designed
+An application designed search tables, request data, and update data.
 
 # Built With
 
+Sequelize
 Express
 MySQL
 
