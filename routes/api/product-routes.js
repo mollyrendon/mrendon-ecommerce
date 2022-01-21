@@ -4,7 +4,8 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 /*Get All Products:
-This code is used to find all products that have a category of category_name and a tag of tag_name and the returned data will be JSON data.  
+This code is used to find all products that have a category of category_name and a tag of tag_name.  The format is similar to the category-routes.js file but here we are using Product.findAll and we need to include the model Category and the model Tag.
+The data will be returned with the res.json method and if there is an error in retrieval a 500 error message will appear.  
 */
 
 router.get('/', (req, res) => {
@@ -32,9 +33,15 @@ router.get('/', (req, res) => {
 
 
 /*Get One Product:
-
+This section of code is used to find one product by its specific ID.  This is still similar to the category route but in this product route Product.findOne is used to retrieve Any errors in retrieval will trigger a 500 error message.  
 */
 
+
+/*Get One Category:
+This piece of code is used to find a single product on its id.  The Category.findOne() method is used to request an array of products from a specific category named 'category_id'.  
+Just like the previous section of code, the results are returned as JSON data using the res.json() method.  
+Again if there is an error, the data the user is trying to retrieve can't be found, then a 500 error appears.  
+*/
 router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
