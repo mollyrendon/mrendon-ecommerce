@@ -4,6 +4,10 @@ const sequelize = require('../config/connection');
 
 class ProductTag extends Model {}
 
+/*Product Tag Model
+These are the specified fields and rules for the product tag model.  
+*/
+
 ProductTag.init(
   {
     id: {
