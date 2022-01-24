@@ -2,7 +2,7 @@
 
 # Purpose
 
-An application designed search tables, request data, and update data.
+An application designed search tables, request data, update data, and delete data.
 
 # Built With
 
@@ -13,3 +13,6 @@ MySQL
 # Contribution
 
 Made by Molly Rendon
+
+
+https://watch.screencastify.com/v/AnAd3HadbFOoa6FBDt46
